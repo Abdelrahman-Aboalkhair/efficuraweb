@@ -1,0 +1,197 @@
+/* Drifting coloured blobs + film grain, sized for a card rather than the full
+   hero (see Hero.module.css for the original full-bleed version). Pure CSS so it
+   can live inside a server component. Tailwind can't express the layered blurred
+   blobs / keyframes / SVG noise, so per the Next.js CSS guide these live in a
+   colocated CSS Module.
+
+   The card itself owns the solid base colour; this layer only adds movement in
+   related hues, so each card stays "primarily the colour it is". */
+
+.blobs {
+  position: absolute;
+  inset: 0;
+  /* Behind the card's text content (which stays in normal flow at z-index 0).
+     The parent card sets `isolate` so this negative layer is scoped to it. */
+  z-index: -1;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  width: 22rem;
+  height: 22rem;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.blob1 {
+  top: -22%;
+  left: -12%;
+  animation: cardDrift1 34s ease-in-out infinite;
+}
+.blob2 {
+  top: -10%;
+  left: 48%;
+  animation: cardDrift2 41s ease-in-out infinite;
+}
+.blob3 {
+  top: 42%;
+  left: 6%;
+  animation: cardDrift3 48s ease-in-out infinite;
+}
+.blob4 {
+  top: 50%;
+  left: 56%;
+  animation: cardDrift4 38s ease-in-out infinite;
+}
+
+/* ---- Violet card: tints around the brand violet (#bf6c35) ---------------- */
+
+.violet .blob1 {
+  background: radial-gradient(circle at center, #8e4bb0, transparent 62%);
+  opacity: 0.38;
+}
+.violet .blob2 {
+  background: radial-gradient(circle at center, #b34a86, transparent 62%);
+  opacity: 0.32;
+}
+.violet .blob3 {
+  background: radial-gradient(circle at center, #c8b6fb, transparent 62%);
+  opacity: 0.3;
+}
+.violet .blob4 {
+  background: radial-gradient(circle at center, #2e1442, transparent 62%);
+  opacity: 0.42;
+}
+
+/* ---- Slate card: pale blue-leaning grays over a light bluish-gray base
+   (#dce3ec). Like the light variant - subtle pastels, low grain - but cooler
+   and neutral. ----------------------------------------------------------- */
+
+.slate .blob1 {
+  background: radial-gradient(circle at center, #b8c4d6, transparent 62%);
+  opacity: 0.55;
+}
+.slate .blob2 {
+  background: radial-gradient(circle at center, #c8d2e0, transparent 62%);
+  opacity: 0.5;
+}
+.slate .blob3 {
+  background: radial-gradient(circle at center, #eef2f8, transparent 62%);
+  opacity: 0.55;
+}
+.slate .blob4 {
+  background: radial-gradient(circle at center, #aab6c8, transparent 62%);
+  opacity: 0.5;
+}
+
+/* ---- Light card: pale violet-leaning pastels over white ------------------ */
+
+.light .blob1 {
+  background: radial-gradient(circle at center, #ddd0f2, transparent 62%);
+  opacity: 0.55;
+}
+.light .blob2 {
+  background: radial-gradient(circle at center, #f0dcea, transparent 62%);
+  opacity: 0.5;
+}
+.light .blob3 {
+  background: radial-gradient(circle at center, #e9e0f9, transparent 62%);
+  opacity: 0.55;
+}
+.light .blob4 {
+  background: radial-gradient(circle at center, #dce4f7, transparent 62%);
+  opacity: 0.5;
+}
+
+/* ---- Film grain ---------------------------------------------------------- */
+
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+.violet .grain {
+  opacity: 0.16;
+}
+.light .grain,
+.slate .grain {
+  opacity: 0.09;
+}
+
+/* ---- Motion -------------------------------------------------------------- */
+
+/* Each blob orbits a full loop so it roams across the whole card rather than
+   nudging in place. Translation is relative to the blob's own size, so these
+   large percentages sweep it corner to corner. */
+@keyframes cardDrift1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(150%, 25%) scale(1.08);
+  }
+  50% {
+    transform: translate(165%, 130%) scale(0.96);
+  }
+  75% {
+    transform: translate(20%, 110%) scale(1.05);
+  }
+}
+@keyframes cardDrift2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-130%, 55%) scale(1.06);
+  }
+  50% {
+    transform: translate(-85%, 150%) scale(0.94);
+  }
+  75% {
+    transform: translate(40%, 115%) scale(1.04);
+  }
+}
+@keyframes cardDrift3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(120%, -55%) scale(1.05);
+  }
+  50% {
+    transform: translate(160%, 35%) scale(0.97);
+  }
+  75% {
+    transform: translate(55%, 80%) scale(1.07);
+  }
+}
+@keyframes cardDrift4 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-120%, -45%) scale(1.04);
+  }
+  50% {
+    transform: translate(-150%, -125%) scale(0.95);
+  }
+  75% {
+    transform: translate(-30%, -90%) scale(1.06);
+  }
+}
+
+/* Honor users who ask for less motion: keep the colour, drop the drift. */
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+}

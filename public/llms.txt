@@ -1,0 +1,37 @@
+# efficura
+
+> efficura builds labrador and springer, software platforms for real-estate debt and investor relations, bringing transparency, velocity and structure to borrowers, operators and lenders. efficura is not a lender or an investment adviser, and does not originate, underwrite or fund loans.
+
+The company and product names are written lowercase: "efficura" (the company) and "labrador" (the product). labrador's AI assistant is called Effi. labrador connects deal flow, borrower communications, deal files, automated credit papers and servicing activity in one live workspace, and deploys into the client's own Azure tenant, so client data never leaves the client's environment and never trains shared models. efficura is Efficura Solutions Ltd, a UK company registered in England and Wales, headquartered in Suffolk with a team in London. Contact: info@efficura.com. Demos can be booked at https://efficura.com/contact.
+
+## Product
+
+- [How it works](https://efficura.com/how-it-works): Origination, underwriting, closing and servicing stay connected in one live workspace, a single system of record for the whole deal.
+- [Email Ingestion](https://efficura.com/product/email-ingestion): The labrador add-in turns an email thread into a structured deal record: borrower, asset, facility and attachments, with nothing to rekey.
+- [Asset Skyview](https://efficura.com/product/asset-skyview): Every asset behind a facility, rendered in 3D and orbited from above, tied to the live deal and its capital stack.
+- [Ask Effi](https://efficura.com/product/ask-effi): Ask a question in plain English and get an answer grounded in the deal's documents. Every answer cites its source clause, and covenant and reporting dates land on the deal calendar automatically.
+- [Automatic Servicing](https://efficura.com/product/automatic-servicing): Interest calcs, drawdowns, redemptions, covenant tests and reporting, tracked and actioned automatically, so loans can be serviced in-house.
+- [How springer works](https://efficura.com/how-springer-works): The raise, the ledger and the reporting stay connected in one record — springer is efficura's investor-relations product, covering fund administration and investor management.
+- [Fund Administration](https://efficura.com/product/fund-administration): Capital calls, distributions, NAV and capital account statements, run from a single audited ledger with human sign-off before anything moves money or reaches an investor.
+- [Investor Management](https://efficura.com/product/investor-management): Every LP and their positions: contacts, accounts and holdings in one register, a fundraising pipeline from introduction to funded, and a portal that shows each investor only what is theirs.
+- [Own Your Data](https://efficura.com/product/own-your-data): labrador deploys into your own Azure tenant, so your deal data never leaves your environment and never trains shared models.
+
+## Who it's for
+
+- [For borrowers](https://efficura.com/for-borrowers): A calmer way to move from first ask to funded loan, with every document, condition and decision easy to follow.
+- [For operators](https://efficura.com/for-operators): Origination, underwriting, closing and servicing connected in one live workspace that gives velocity to execute.
+- [For lenders](https://efficura.com/for-lenders): Pipeline, exposure, approvals and servicing activity in focus, with the context behind every dollar deployed.
+
+## Company
+
+- [Martley Capital case study](https://efficura.com/martley-capital): How labrador saved a London real-estate investment advisory three weeks in deal origination, structuring and execution, and around ten hours a week of manual data entry.
+- [About us](https://efficura.com/about): The team building the operating system for asset and real-estate debt managers. Each team member has a profile page at /about/[name].
+- [Careers](https://efficura.com/careers): Open roles in the London-based, founder-led team.
+- [Contact / book a demo](https://efficura.com/contact): Talk to the team or book a demonstration.
+- [Trust centre](https://trust.efficura.com): Compliance and security posture; SOC 2 certification currently underway.
+
+## Optional
+
+- [Terms & Conditions](https://efficura.com/terms): Website terms, governed by the laws of England and Wales.
+- [Privacy Policy](https://efficura.com/privacy): How efficura collects, uses and protects personal data.
+- [Cookie Notice](https://efficura.com/cookies): Cookies and similar technologies used on the site.

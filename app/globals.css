@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueUltraLight.otf") format("opentype");
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueThin.otf") format("opentype");
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueLight.otf") format("opentype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueRoman.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueMedium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueBold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueHeavy.otf") format("opentype");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueBlack.otf") format("opentype");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueUltraLightItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueThinItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueLightItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueItalic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueMediumItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueBoldItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueHeavyItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/fonts/HelveticaNeueBlackItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* The splash (hero + nav cards) only fills the first viewport on screens that
+   are both wide *and* tall enough for the two-halves split to breathe - wide so
+   the cards sit in their 4-up row (the `lg` 1024px breakpoint), tall so the hero
+   isn't crammed above them. On shorter/narrower screens the `splash-fill:*`
+   utilities in Splash.tsx / Hero.tsx are inert and the blocks just stack with
+   the standard rhythm. */
+@custom-variant splash-fill (@media (min-width: 1024px) and (min-height: 800px));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-helvetica-neue: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-helvetica-neue);
+
+  /* Extends Tailwind's container scale (which stops at 7xl/80rem),
+     continuing the +8rem rhythm so `max-w-8xl` .. `max-w-12xl` resolve. */
+  --container-8xl: 88rem;  /* 1408px */
+  --container-9xl: 96rem;  /* 1536px */
+  --container-10xl: 104rem; /* 1664px */
+  --container-11xl: 112rem; /* 1792px */
+  --container-12xl: 120rem; /* 1920px */
+
+  /* Home-page product carousel (ProductShots): the card strip drifts
+     right-to-left; its content is rendered twice, so -50% is one seamless
+     loop. Keyframes live at the stylesheet root below - inside `@theme
+     inline` they wouldn't be emitted. */
+  --animate-marquee: marquee 75s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  /* Fluid root font-size. Almost everything on the site is sized in rem
+     (type, padding, gaps, even the --container-* widths), so this one knob
+     scales the whole desktop layout together with the viewport width. It
+     exists to counter the "looks huge on a scaled-down display" effect: a
+     HiDPI laptop at Windows 200% scaling reports only ~960 CSS px, so the
+     desktop design (tuned for ~1400-1920) is crammed into a phone-width
+     canvas and everything reads oversized.
+
+     Shrink-only curve: pinned at the tuned 16px for any normal monitor
+     (>=1400 CSS px hits the 1rem cap, so it's NEVER larger than the original
+     and a 125%/150% desktop doesn't drift), ramping *down* to a 12px floor
+     across the narrow/tablet band so a ~960px scaled laptop lands near
+    12.5px - a visible step down from 16px without becoming unreadable
+    (dpr 2 doubles every CSS px, so it's physically fine there). Cap/floor
+    are in rem so they resolve against the browser's initial 16px (NOT this
+    dynamic value - that's the spec rule for rem on the root's own
+    font-size), so a user's custom default font-size still shifts the range,
+    and media-query breakpoints (which also resolve rem against the initial
+    16px) don't drift. The phone case is handled by the reset below the html
+    block: a single width->size curve can't give a 390px phone large text AND
+    a 960px laptop small text, so under 640px (where the layout goes mobile
+    anyway) we drop the fluid scaling and restore a readable 16px. */
+  font-size: clamp(0.75rem, 0.3rem + 0.8vw, 1rem);
+
+  /* Force light mode site-wide: ignore the OS dark-mode preference and keep
+     browser-rendered UI (form controls, scrollbars) light to match. */
+  color-scheme: light;
+
+  /* Smoothly animate in-page anchor jumps (hero "Book a Demo" / "Find out
+     more"). Targets set their own scroll-mt so the sticky header doesn't cover
+     them. */
+  scroll-behavior: smooth;
+
+  /* Always reserve space for the scrollbar so page content doesn't shift
+     horizontally when navigating between pages that do and don't scroll. */
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+
+}
+
+/* Phones: below the mobile layout breakpoint the fluid shrink above would
+  drag body/`text-sm` copy well under a readable size, so restore the tuned
+  16px root. The layout switches to its stacked mobile form here anyway, so
+  the step at the boundary is masked. */
+@media (max-width: 639px) {
+  html {
+    font-size: 1rem;
+  }
+}
+
+/* Keep the product device in proportion on high-density laptop displays
+   without reducing the type and navigation around it. */
+@media (min-width: 640px) and (min-resolution: 1.25dppx) {
+  html {
+    font-size: 0.8125rem;
+  }
+
+  .laptop-showcase-frame {
+    max-width: 56rem;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-helvetica-neue);
+  /* Default text weight for the site: the Light (300) cut. Helvetica Neue's
+     Roman (400) reads too heavy at body sizes; anything that should be
+     heavier opts in with font-normal/font-medium/etc. */
+  font-weight: 300;
+}
+
+#cc-main {
+  --cc-font-family: var(--font-helvetica-neue);
+  --cc-bg: #ffffff;
+  --cc-primary-color: #18181b;
+  --cc-secondary-color: #52525b;
+  --cc-link-color: #18181b;
+  --cc-btn-primary-bg: #18181b;
+  --cc-btn-primary-border-color: #18181b;
+  --cc-btn-primary-hover-bg: #000000;
+  --cc-btn-primary-hover-border-color: #000000;
+  --cc-btn-secondary-bg: #f4f4f5;
+  --cc-btn-secondary-color: #27272a;
+  --cc-btn-secondary-border-color: #e4e4e7;
+  --cc-btn-secondary-hover-bg: #e4e4e7;
+  --cc-btn-secondary-hover-border-color: #d4d4d8;
+  --cc-cookie-category-block-bg: #fafafa;
+  --cc-cookie-category-block-border: #e4e4e7;
+  --cc-cookie-category-block-hover-bg: #f4f4f5;
+  --cc-cookie-category-block-hover-border: #d4d4d8;
+  --cc-cookie-category-expanded-block-bg: #ffffff;
+  --cc-cookie-category-expanded-block-hover-bg: #ffffff;
+  --cc-separator-border-color: #e4e4e7;
+  --cc-footer-bg: #fafafa;
+  --cc-footer-border-color: #e4e4e7;
+  --cc-footer-color: #52525b;
+  --cc-toggle-on-bg: #18181b;
+  --cc-toggle-readonly-bg: #a1a1aa;
+  --cc-modal-border-radius: 0.5rem;
+  --cc-btn-border-radius: 0.25rem;
+  --cc-overlay-bg: rgb(24 24 27 / 55%);
+  --cc-modal-margin: 1rem;
+  --cc-z-index: 2147483000;
+}
